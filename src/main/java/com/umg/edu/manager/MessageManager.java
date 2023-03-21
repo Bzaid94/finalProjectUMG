@@ -15,4 +15,6 @@ public interface MessageManager {
         void deleteMessage(Long id);
 
         void deleteListMessage(List<Long> ids);
+
+        void activateUser(Long id);
 }

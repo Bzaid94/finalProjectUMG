@@ -15,6 +15,7 @@ public class MessageController {
 
     @PostMapping("/new/")
     public Message saveMessage(@RequestBody Message message) {
+        message.setActive(true);
         return messageManager.saveMessage(message);
     }
 
@@ -43,5 +44,11 @@ public class MessageController {
     public String deleteListMessageById(@RequestBody List<Long> ids){
         messageManager.deleteListMessage(ids);
         return "Messages deleted";
+    }
+
+    @PostMapping("/activeMessage/{id}/")
+    public String activeMessageById(@PathVariable("id") Long id){
+            messageManager.activateUser(id);
+        return "Messages activated";
     }
 }

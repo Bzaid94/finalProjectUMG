@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class MessageManagerImpl implements MessageManager{
@@ -32,7 +33,7 @@ public class MessageManagerImpl implements MessageManager{
     @Override
     public List<Message> getAllMessages() {
         logger.info("Get all messages");
-        return messageRepository.findAll();
+        return messageRepository.findByActiveTrue();
     }
 
     @Override
@@ -53,12 +54,31 @@ public class MessageManagerImpl implements MessageManager{
     @Override
     public void deleteMessage(Long id) {
         logger.info("Message deleted {}", id);
-        messageRepository.deleteById(id);
+        Message message = messageRepository.findById(id).orElseThrow(()->
+        new RuntimeException("Message not found with Id: " + id));
+        message.setActive(false);
+        messageRepository.save(message);
     }
 
     @Override
     public void deleteListMessage(List<Long> ids) {
         logger.info("Messages list deleted {}", ids);
-        messageRepository.deleteAllById(ids);
+        List<Message> messages = messageRepository.findAllById(ids);
+        for (Message message: messages) {
+            message.setActive(false);
+        }
+        messageRepository.saveAll(messages);
+    }
+
+    @Override
+    public void activateUser(Long id) {
+        Optional<Message> findMessage = messageRepository.findById(id);
+        if (findMessage.isPresent()) {
+            Message message = findMessage.get();
+            message.setActive(true);
+            messageRepository.save(message);
+        } else {
+            throw new IllegalArgumentException("User not found with id " + id);
+        }
     }
 }
