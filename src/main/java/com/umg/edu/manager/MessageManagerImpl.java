@@ -76,9 +76,11 @@ public class MessageManagerImpl implements MessageManager{
         if (findMessage.isPresent()) {
             Message message = findMessage.get();
             message.setStatus(true);
+            logger.info("Message activated {}", message);
             messageRepository.save(message);
         } else {
-            throw new IllegalArgumentException("User not found with id " + id);
+            logger.info("User not found with id {}", id);
+            throw new RuntimeException("User not found with id " + id);
         }
     }
 }
