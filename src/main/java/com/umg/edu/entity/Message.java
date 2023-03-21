@@ -21,7 +21,7 @@ public class Message {
     private Long id;
     private String message;
     private String author;
-    private boolean active;
+    private boolean status;
     @CreationTimestamp
     @Column(name = "date")
     private LocalDateTime date;

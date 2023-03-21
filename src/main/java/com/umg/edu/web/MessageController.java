@@ -15,7 +15,7 @@ public class MessageController {
 
     @PostMapping("/new/")
     public Message saveMessage(@RequestBody Message message) {
-        message.setActive(true);
+        message.setStatus(true);
         return messageManager.saveMessage(message);
     }
 

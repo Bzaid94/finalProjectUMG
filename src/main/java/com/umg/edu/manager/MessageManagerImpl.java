@@ -33,7 +33,7 @@ public class MessageManagerImpl implements MessageManager{
     @Override
     public List<Message> getAllMessages() {
         logger.info("Get all messages");
-        return messageRepository.findByActiveTrue();
+        return messageRepository.findByStatusTrue();
     }
 
     @Override
@@ -56,7 +56,7 @@ public class MessageManagerImpl implements MessageManager{
         logger.info("Message deleted {}", id);
         Message message = messageRepository.findById(id).orElseThrow(()->
         new RuntimeException("Message not found with Id: " + id));
-        message.setActive(false);
+        message.setStatus(false);
         messageRepository.save(message);
     }
 
@@ -65,7 +65,7 @@ public class MessageManagerImpl implements MessageManager{
         logger.info("Messages list deleted {}", ids);
         List<Message> messages = messageRepository.findAllById(ids);
         for (Message message: messages) {
-            message.setActive(false);
+            message.setStatus(false);
         }
         messageRepository.saveAll(messages);
     }
@@ -75,7 +75,7 @@ public class MessageManagerImpl implements MessageManager{
         Optional<Message> findMessage = messageRepository.findById(id);
         if (findMessage.isPresent()) {
             Message message = findMessage.get();
-            message.setActive(true);
+            message.setStatus(true);
             messageRepository.save(message);
         } else {
             throw new IllegalArgumentException("User not found with id " + id);
