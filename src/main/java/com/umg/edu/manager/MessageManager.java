@@ -8,6 +8,7 @@ public interface MessageManager {
         Message saveMessage(Message message);
 
         Message getMessageById(Long id);
+
         List<Message> getAllMessages();
 
         Message updateMessage(Message message, Long id);
@@ -16,5 +17,5 @@ public interface MessageManager {
 
         void deleteListMessage(List<Long> ids);
 
-        void activateUser(Long id);
+        void activateMessage(Long id);
 }

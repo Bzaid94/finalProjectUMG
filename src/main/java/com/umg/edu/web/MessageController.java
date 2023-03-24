@@ -43,12 +43,12 @@ public class MessageController {
     @DeleteMapping("/deleteList/")
     public String deleteListMessageById(@RequestBody List<Long> ids){
         messageManager.deleteListMessage(ids);
-        return "Messages deleted";
+        return "Messages deleted successfully";
     }
 
     @PostMapping("/activeMessage/{id}/")
     public String activeMessageById(@PathVariable("id") Long id){
-            messageManager.activateUser(id);
+            messageManager.activateMessage(id);
         return "Messages activated";
     }
 }

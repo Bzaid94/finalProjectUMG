@@ -38,6 +38,7 @@ public class MessageManagerImpl implements MessageManager{
 
     @Override
     public Message updateMessage(Message message, Long id) {
+        logger.info("Request update message by Id: {}", id);
         Message messageUpdate = messageRepository.findById(id).get();
 
         if(Objects.nonNull(message.getMessage()) && !"".equalsIgnoreCase(message.getMessage())){
@@ -53,25 +54,28 @@ public class MessageManagerImpl implements MessageManager{
 
     @Override
     public void deleteMessage(Long id) {
-        logger.info("Message deleted {}", id);
+        logger.info("Request delete by Id {}", id);
         Message message = messageRepository.findById(id).orElseThrow(()->
         new RuntimeException("Message not found with Id: " + id));
         message.setStatus(false);
+        logger.info("Message deleted {}", id);
         messageRepository.save(message);
     }
 
     @Override
     public void deleteListMessage(List<Long> ids) {
-        logger.info("Messages list deleted {}", ids);
+        logger.info("Request delete by list {}", ids);
         List<Message> messages = messageRepository.findAllById(ids);
         for (Message message: messages) {
             message.setStatus(false);
         }
+        logger.info("Messages list deleted {}", ids);
         messageRepository.saveAll(messages);
     }
 
     @Override
-    public void activateUser(Long id) {
+    public void activateMessage(Long id) {
+        logger.info("Request activate message by Id: {}", id);
         Optional<Message> findMessage = messageRepository.findById(id);
         if (findMessage.isPresent()) {
             Message message = findMessage.get();
@@ -79,8 +83,8 @@ public class MessageManagerImpl implements MessageManager{
             logger.info("Message activated {}", message);
             messageRepository.save(message);
         } else {
-            logger.info("User not found with id {}", id);
-            throw new RuntimeException("User not found with id " + id);
+            logger.info("Message not found with id {}", id);
+            throw new RuntimeException("Message not found with id " + id);
         }
     }
 }
