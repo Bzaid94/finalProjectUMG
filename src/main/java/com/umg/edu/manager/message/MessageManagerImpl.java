@@ -1,4 +1,4 @@
-package com.umg.edu.manager;
+package com.umg.edu.manager.message;
 
 import com.umg.edu.entity.Message;
 import com.umg.edu.repository.MessageRepository;

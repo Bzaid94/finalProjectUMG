@@ -1,14 +1,15 @@
 package com.umg.edu.web;
 
 import com.umg.edu.entity.Message;
-import com.umg.edu.manager.MessageManager;
+import com.umg.edu.manager.message.MessageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/message")
 @RestController
+@RequestMapping("/message")
+@CrossOrigin(origins = "${angular.url}", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class MessageController {
     @Autowired
     private MessageManager messageManager;
