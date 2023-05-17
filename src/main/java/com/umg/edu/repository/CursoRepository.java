@@ -1,12 +1,12 @@
 package com.umg.edu.repository;
 
-import com.umg.edu.entity.Message;
+import com.umg.edu.entity.Curso;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface MessageRepository extends JpaRepository<Message, Long> {
-    List<Message> findByStatusTrue();
+public interface CursoRepository extends JpaRepository<Curso, Long> {
+    List<Curso> findByStatusTrue();
 }
