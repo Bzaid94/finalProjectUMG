@@ -50,6 +50,10 @@ public class AlumnoManagerImpl implements AlumnoManager{
             alumnoUpdate.setLastName(alumno.getLastName());
         }
 
+        if(Objects.nonNull(alumno.getCarne()) && !"".equalsIgnoreCase(alumno.getCarne())){
+            alumnoUpdate.setCarne(alumno.getCarne());
+        }
+
         if(Objects.nonNull(alumno.getEmail()) && !"".equalsIgnoreCase(alumno.getEmail())){
             alumnoUpdate.setEmail(alumno.getEmail());
         }

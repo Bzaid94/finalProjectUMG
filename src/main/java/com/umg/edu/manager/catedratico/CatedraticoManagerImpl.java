@@ -46,6 +46,10 @@ public class CatedraticoManagerImpl implements CatedratioManager {
             catedraticoUpdate.setName(catedratico.getName());
         }
 
+        if(Objects.nonNull(catedratico.getLastName()) && !"".equalsIgnoreCase(catedratico.getLastName())){
+            catedraticoUpdate.setLastName(catedratico.getLastName());
+        }
+
         if(Objects.nonNull(catedratico.getSpeciality()) && !"".equalsIgnoreCase(catedratico.getSpeciality())){
             catedraticoUpdate.setSpeciality(catedratico.getSpeciality());
         }
