@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: finalProjectUMG
+  annotations:
+    github.com/project-slug: Bzaid94/finalProjectUMG
+spec:
+  type: other
+  lifecycle: unknown
+  owner: guests
